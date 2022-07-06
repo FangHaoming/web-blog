@@ -4,7 +4,7 @@ heroImage: ./logo.png
 actionText: Get Started →
 actionLink: /vue/
 features:
-- title: 数据结构专题测试aaaaa
+- title: 数据结构专题
   details: 常见数据结构（二叉树、数组、堆、栈）的基本使用以及典型题目分析。
 - title: 算法专题
   details: 常见算法解题指南和典型算法的JavaScript实现。
