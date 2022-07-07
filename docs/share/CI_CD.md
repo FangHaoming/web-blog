@@ -145,16 +145,16 @@ debug:  gitlab-runner: the service is not installed
 
 ## 目标
 
-1. 基于 git hook 的自动化流程
-  1. 保证网络连通性
-  2. 在构建机器上部署 git 并创建 git 账户与 bare repository
-  3. 配置 git-hook 与编写构建/部署脚本
-  4. 配置开发机器的部署源
-2. 基于 gitlab-runner 的自动化流程
-  - 部署并验证完整流程
-    1. 按照文档在构建机器部署 gitlab/使用 gitlab 线上服务
-    2. 在构建机器部署 gitlab-runner 并注册到 gitlab 服务
-    3. 在开发机器配置 gitlab CI 验证流程
+- ~~基于 git hook 的自动化流程~~
+  1. ~~保证网络连通性~~
+  2. ~~在构建机器上部署 git 并创建 git 账户与 bare repository~~
+  3. ~~配置 git-hook 与编写构建/部署脚本~~
+  4. ~~配置开发机器的部署源~~
+
+  - ~~基于 gitlab-runner 的自动化流程~~
+    1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
+    2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
+    3. ~~在开发机器配置 gitlab CI 验证流程~~
   - 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
 
 ## 参考
