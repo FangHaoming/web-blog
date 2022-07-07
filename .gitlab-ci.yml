@@ -3,7 +3,8 @@ stages:          # List of stages for jobs, and their order of execution
   - build
 
 variables:
-  DIST_PATH: "/www/workspace/web-blog"
+  DIST_PATH: "/www/gitlab"
+  GIT_REPOS: "git@fanghaoming.com:moody/web-blog.git"
 
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
@@ -12,10 +13,12 @@ build-job:       # This job runs in the build stage, which runs first.
   only:
     - master
   script:
+    - echo "$USER"
     - cd $DIST_PATH
+    - git clone $GIT_REPOS
     - yarn install
     - echo "————————————————Building——————————————————"
     - yarn build
     - echo "————————————————Done build————————————————"
     - rm -rf /usr/local/nginx/html/web-blog
-    - cp -r /www/workspace/web-blog/docs/.vuepress/dist /usr/local/nginx/html/web-blog
+    - cp -r /www/gitlab/web-blog/docs/.vuepress/dist /usr/local/nginx/html/web-blog
