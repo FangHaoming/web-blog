@@ -37,6 +37,7 @@
 ②**编辑nginx.conf**  
 
 `vim /usr/local/nginx/conf/nginx.conf`
+
 ![image-20220707120200105](./images/image-20220707120200105.png)
 
 ③**重新加载** 
