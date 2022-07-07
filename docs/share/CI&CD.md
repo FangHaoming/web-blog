@@ -86,6 +86,8 @@
 
 #### ②安装并注册gitlab-runner [#](https://docs.gitlab.com/runner/install/linux-repository.html)
 
+#### ③编辑 `gitlab-ci.yaml`
+
 ![image-20220707145744052](./images/image-20220707145744052.png)
 
 ![image-20220707145802093](./images/image-20220707145802093.png)
