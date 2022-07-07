@@ -37,6 +37,7 @@
 ②**编辑nginx.conf**  
 
 `vim /usr/local/nginx/conf/nginx.conf`
+![image-20220707120200105](./images/image-20220707120200105.png)
 
 ③**重新加载** 
 
@@ -48,7 +49,7 @@
 
 [http://fanghaoming.com/my-vue-app/](http://fanghaoming.com/my-vue-app/)
 
-![image-20220707120200105](./images/image-20220707120200105.png)
+
 
 
 ## CI/CD
