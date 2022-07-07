@@ -1,7 +1,7 @@
 module.exports = {
     title: 'awesome-web',
     description: '个人学习用途的博客',
-    base: '/',
+    base: '/web-blog/',
     themeConfig: {
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
