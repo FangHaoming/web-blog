@@ -6,11 +6,14 @@ module.exports = {
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
         nav: [
+            { text: 'share', link: '/share/'},
             { text: 'vue', link: '/vue/' },
             { text: 'react', link: '/react/' },
             { text: 'github', link: 'https://github.com/FangHaoming' },
         ],
         sidebar: {
+            '/share/': [
+            ],
             '/vue/': [
                 '/vue/响应式原理',
             ],
