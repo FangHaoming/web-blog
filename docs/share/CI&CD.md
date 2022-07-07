@@ -8,7 +8,7 @@
 
 ### 子路径部署
 
-①**[安装nginx](https://zhuanlan.zhihu.com/p/378409850)**
+①[安装nginx](https://zhuanlan.zhihu.com/p/378409850)
 
 `wget http://nginx.org/download/nginx-1.21.0.tar.gz`
 
