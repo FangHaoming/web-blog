@@ -13,6 +13,7 @@ module.exports = {
         ],
         sidebar: {
             '/share/': [
+                '/share/CI&CD',
             ],
             '/vue/': [
                 '/vue/响应式原理',
