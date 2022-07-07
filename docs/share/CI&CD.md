@@ -1,1 +1,7 @@
+---
+{
+  "title": "CI/CD",
+}
+---
+
 ![image-20220706202320916](D:\CODE\web-blog\docs\share\images\image-20220706202320916.png)
