@@ -52,7 +52,6 @@
 
 
 
-
 ## CI/CD
 
 ### 基于git hook的自动化流程
@@ -88,8 +87,22 @@
 
 #### ③编辑 `gitlab-ci.yaml`
 
+![image-20220707201428767](./images/image-20220707201428767.png)
+
+#### ④推送代码到gitlab，验证pipeline
+
+![image-20220707200235369](./images/image-20220707200235369.png)
+
 #### #其他
 
 #### 在构建机器查看runner接收到的job
 
 ![image-20220707171710790](./images/image-20220707171710790.png)
+
+### #TODO
+
+设置gitlab-runner
+
+gitlab-runner: the service is not installed
+
+添加git hooks 图片
