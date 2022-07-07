@@ -14,6 +14,8 @@ module.exports = {
         sidebar: {
             '/share/': [
                 '/share/CI&CD',
+                '/share/客户端缓存',
+                '/share/JS异步机制',
             ],
             '/vue/': [
                 '/vue/响应式原理',
