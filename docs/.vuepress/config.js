@@ -13,7 +13,7 @@ module.exports = {
         ],
         sidebar: {
             '/share/': [
-                '/share/CI&CD',
+                '/share/CI_CD',
                 '/share/客户端缓存',
                 '/share/JS异步机制',
             ],
