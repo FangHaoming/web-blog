@@ -1,6 +1,6 @@
 module.exports = {
     title: 'awesome-web',
-    description: '个人学习用途的博客',
+    description: '个人学习用途博客',
     base: '/',
     themeConfig: {
         sidebarDepth: 2,
