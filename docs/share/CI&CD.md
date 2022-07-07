@@ -8,7 +8,7 @@
 
 ## 子路径部署
 
-①[安装nginx](https://zhuanlan.zhihu.com/p/378409850)**
+①安装nginx [#](https://zhuanlan.zhihu.com/p/378409850)
 
 `wget http://nginx.org/download/nginx-1.21.0.tar.gz`
 
@@ -42,11 +42,11 @@
 
 `nginx -s reload`
 
-④访问服务器ip，输入正确端口号、路径，查看是否部署成功
+④访问服务器ip/域名，输入正确端口号、路径，查看是否部署成功
 
-[http://175.178.22.67]()
+[http://fanghaoming.com/](http://fanghaoming.com/)
 
-[http://fanghaoming.com/my-vue-app/]()
+[http://fanghaoming.com/my-vue-app/](http://fanghaoming.com/my-vue-app/)
 
 ![image-20220707120200105](./images/image-20220707120200105.png)
 
@@ -61,7 +61,7 @@
 
 ②创建远程仓库 `git init --bare web-blog.git`
 
-③编辑`web-blog.git/hooks`目录下的`post-receive`
+③编辑`web-blog.git/hooks`目录下的`post-receive` 并赋予执行权限 `chmod +x post-receive`
 
 ![image-20220707120055257](./images/image-20220707120055257.png)
 
@@ -74,3 +74,7 @@
 ![](./images/image-20220706202320916.png)
 
 ### 基于gitlab-runner的自动化流程
+
+①安装gitlab
+
+②安装并注册gitlab-runner
