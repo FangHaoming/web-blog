@@ -6,9 +6,9 @@
 
 > 用腾讯云轻量应用服务器安装CentO S 7操作系统验证子路径部署、git自动化流程
 
-### 子路径部署
+## 子路径部署
 
-①[安装nginx](https://zhuanlan.zhihu.com/p/378409850)
+①[安装nginx](https://zhuanlan.zhihu.com/p/378409850)**
 
 `wget http://nginx.org/download/nginx-1.21.0.tar.gz`
 
