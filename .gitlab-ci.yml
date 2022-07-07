@@ -16,7 +16,7 @@ build-job:       # This job runs in the build stage, which runs first.
     - echo "$USER"
     - cd $DIST_PATH
     - rm -rf web-blog
-    - git clone $GIT_REPOS
+    - git clone -b master $GIT_REPOS
     - cd $DIST_PATH/web-blog
     - pwd -P
     - yarn install
