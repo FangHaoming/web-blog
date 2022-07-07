@@ -8,7 +8,7 @@
 
 ## 子路径部署
 
-①安装nginx [#](https://zhuanlan.zhihu.com/p/378409850)
+①**安装nginx** [#](https://zhuanlan.zhihu.com/p/378409850)
 
 `wget http://nginx.org/download/nginx-1.21.0.tar.gz`
 
@@ -42,7 +42,7 @@
 
 `nginx -s reload`
 
-④访问服务器ip/域名，输入正确端口号、路径，查看是否部署成功
+④**访问服务器ip/域名，输入正确端口号、路径，查看是否部署成功**
 
 [http://fanghaoming.com/](http://fanghaoming.com/)
 
