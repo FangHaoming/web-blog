@@ -8,7 +8,7 @@
 
 ## 子路径部署
 
-①**安装nginx** [#](https://zhuanlan.zhihu.com/p/378409850)
+#### ①安装nginx [#](https://zhuanlan.zhihu.com/p/378409850)
 
 `wget http://nginx.org/download/nginx-1.21.0.tar.gz`
 
@@ -34,17 +34,17 @@
 
 `ps -ef | grep nginx`
 
-②**编辑nginx.conf**  
+#### ②编辑nginx.conf  
 
 `vim /usr/local/nginx/conf/nginx.conf`
 
 ![image-20220707120200105](./images/image-20220707120200105.png)
 
-③**重新加载** 
+#### ③重新加载
 
 `nginx -s reload`
 
-④**访问服务器ip/域名，输入正确端口号、路径，查看是否部署成功**
+#### ④访问服务器ip/域名，输入正确端口号、路径，查看是否部署成功
 
 [http://fanghaoming.com/](http://fanghaoming.com/)
 
@@ -57,26 +57,35 @@
 
 ### 基于git hook的自动化流程
 
+
+
 以项目`web-blog`为例：
+#### ①在构建机器上部署 git 并创建 Git 账户
 
-①在构建机器上部署 git 并创建 Git 账户
+#### ②创建远程仓库 `git init --bare web-blog.git`
 
-②创建远程仓库 `git init --bare web-blog.git`
-
-③编辑`web-blog.git/hooks`目录下的`post-receive` 并赋予执行权限 `chmod +x post-receive`
+#### ③编辑`web-blog.git/hooks`目录下的`post-receive` 并赋予执行权限 `chmod +x post-receive`
 
 ![image-20220707120055257](./images/image-20220707120055257.png)
 
-④在开发机器上添加部署源
+#### ④在开发机器上添加部署源
 
 ![image-20220707131237502](./images/image-20220707131237502.png)
 
-⑤将代码推到构建机器
+#### ⑤将代码推到构建机器
 
 ![](./images/image-20220706202320916.png)
 
 ### 基于gitlab-runner的自动化流程
 
-①安装gitlab
+![image-20220707154056802](./images/image-20220707154056802.png)
 
-②安装并注册gitlab-runner
+![image-20220707154340918](./images/image-20220707154340918.png)
+
+#### ①安装gitlab [#](https://about.gitlab.com/install/#centos-7)
+
+#### ②安装并注册gitlab-runner [#](https://docs.gitlab.com/runner/install/linux-repository.html)
+
+![image-20220707145744052](./images/image-20220707145744052.png)
+
+![image-20220707145802093](./images/image-20220707145802093.png)
