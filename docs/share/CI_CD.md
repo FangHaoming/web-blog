@@ -174,12 +174,6 @@ build-job:       # This job runs in the build stage, which runs first.
 
 ![image-20220707171710790](./images/image-20220707171710790.png)
 
-### #TODO
-
-debug:  gitlab-runner: the service is not installed
-
-验证公司runner
-
 ## 目标
 
 - ~~基于 git hook 的自动化流程~~
