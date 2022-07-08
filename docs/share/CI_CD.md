@@ -131,7 +131,7 @@ while read oldrev newrev ref
 #### ③编辑 `gitlab-ci.yaml`
 
 ```bash
-stages:          # List of stages for jobs, and their order of execution 
+stages:          # List of stages for jobs, and their order of execution
   - build
 
 variables:
@@ -159,9 +159,13 @@ build-job:       # This job runs in the build stage, which runs first.
 
 #### ④推送代码到gitlab，验证pipeline
 
-![image-20220707213641857](./images/image-20220707213641857.png)
+![image-20220708105655104](./images/image-20220708105655104.png)
 
-![image-20220707213738630](./images/image-20220707213738630.png)
+![image-20220708105605917](./images/image-20220708105605917.png)
+
+![image-20220708105756763](./images/image-20220708105756763.png)
+
+![image-20220708105836346](./images/image-20220708105836346.png)
 
 #### #其他
 
@@ -184,11 +188,11 @@ debug:  gitlab-runner: the service is not installed
   3. ~~配置 git-hook 与编写构建/部署脚本~~
   4. ~~配置开发机器的部署源~~
 
-- ~~基于 gitlab-runner 的自动化流程~~
-  1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
-  2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
-  3. ~~在开发机器配置 gitlab CI 验证流程~~
-- 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
+  - ~~基于 gitlab-runner 的自动化流程~~
+    1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
+    2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
+    3. ~~在开发机器配置 gitlab CI 验证流程~~
+  - 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
 
 ## 参考
 
