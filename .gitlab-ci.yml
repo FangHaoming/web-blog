@@ -12,7 +12,6 @@ build-job:       # This job runs in the build stage, which runs first.
     - release
   only:
     - tags
-    - master
   script:
     - cd $DIST_PATH/web-blog
     - git pull
