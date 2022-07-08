@@ -110,15 +110,23 @@ while read oldrev newrev ref
 
 ![](./images/image-20220706202320916.png)
 
-### 基于gitlab-runner的自动化流程
+### 基于gitlab-runner的自动化流程 [#](https://docs.gitlab.com/runner/)
 
 ![image-20220707154056802](./images/image-20220707154056802.png)
 
+
+
 ![image-20220707154340918](./images/image-20220707154340918.png)
+
+![img](./images/16155928243705.jpg)
 
 #### ①安装gitlab [#](https://about.gitlab.com/install/#centos-7)
 
+![image-20220708093003541](./images/image-20220708093003541.png)
+
 #### ②安装并注册gitlab-runner [#](https://docs.gitlab.com/runner/install/linux-repository.html)
+
+![image-20220708093607619](./images/image-20220708093607619.png)
 
 #### ③编辑 `gitlab-ci.yaml`
 
@@ -178,3 +186,5 @@ debug:  gitlab-runner: the service is not installed
 > [GitLab CI/CD](https://docs.gitlab.com/ee/ci/)
 >
 > [GitLab Runner](https://docs.gitlab.com/runner/)
+>
+> [GitLab CI 之 Runner 的 Executor 該如何選擇？](https://chengweichen.com/2021/03/gitlab-ci-executor.html)
