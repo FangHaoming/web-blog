@@ -174,7 +174,34 @@ build-job:       # This job runs in the build stage, which runs first.
 
 ![image-20220707171710790](./images/image-20220707171710790.png)
 
+### 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程
+
+#### ①安装gitlab-runner并使用公司gitlab的url和token注册runner
+
+#### ②编辑`gitlab-ci.yaml`
+
+```
+stages:
+  - build
+
+build:
+  stage: build
+  tags:
+    - fanghaoming
+  only:
+    - fanghaoming/CI
+  script:
+    - echo "This is output by gitlab-runner which runs in fanghaoming/SZ machine "
+```
+
+#### ③验证pipeline
+
+![image-20220708130401509](./images/image-20220708130401509.png)
+
+![image-20220708130439292](./images/image-20220708130439292.png)
+
 ## 目标
+
 - 构建两个 Web 应用分别部署在根路径以及 `/subdirectory` 路径 👌
   - 要求使用 Nginx 作 Web 容器
   - 要求应用都有路由/静态资源文件
@@ -190,7 +217,7 @@ build-job:       # This job runs in the build stage, which runs first.
   1. 按照文档在构建机器部署 gitlab/使用 gitlab 线上服务
   2. 在构建机器部署 gitlab-runner 并注册到 gitlab 服务
   3. 在开发机器配置 gitlab CI 验证流程
-- 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
+- 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）👌
 
 ## 参考
 
@@ -215,3 +242,5 @@ build-job:       # This job runs in the build stage, which runs first.
 > [GitLab Runner](https://docs.gitlab.com/runner/)
 >
 > [GitLab CI 之 Runner 的 Executor 該如何選擇？](https://chengweichen.com/2021/03/gitlab-ci-executor.html)
+>
+> [Install GitLab Runner on Windows](https://docs.gitlab.com/runner/install/windows.html)
