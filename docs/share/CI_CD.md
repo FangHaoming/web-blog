@@ -110,7 +110,7 @@ while read oldrev newrev ref
 
 ![](./images/image-20220706202320916.png)
 
-### 基于gitlab-runner的自动化流程 [#](https://docs.gitlab.com/runner/)
+### 基于gitlab-runner的自动化流程
 
 ![image-20220707154056802](./images/image-20220707154056802.png)
 
@@ -175,6 +175,10 @@ build-job:       # This job runs in the build stage, which runs first.
 ![image-20220707171710790](./images/image-20220707171710790.png)
 
 ## 目标
+- ~~构建两个 Web 应用分别部署在根路径以及 `/subdirectory` 路径~~
+  - ~~要求使用 Nginx 作 Web 容器~~
+  - ~~要求应用都有路由/静态资源文件~~
+  - ~~子路径部署的项目静态文件能正确访问~~
 
 - ~~基于 git hook 的自动化流程~~
   1. ~~保证网络连通性~~
@@ -182,11 +186,11 @@ build-job:       # This job runs in the build stage, which runs first.
   3. ~~配置 git-hook 与编写构建/部署脚本~~
   4. ~~配置开发机器的部署源~~
 
-  - ~~基于 gitlab-runner 的自动化流程~~
-    1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
-    2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
-    3. ~~在开发机器配置 gitlab CI 验证流程~~
-  - 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
+- ~~基于 gitlab-runner 的自动化流程~~
+  1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
+  2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
+  3. ~~在开发机器配置 gitlab CI 验证流程~~
+- 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
 
 ## 参考
 
