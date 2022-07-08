@@ -1,6 +1,6 @@
 module.exports = {
     title: 'awesome-web',
-    description: '个人学习用途的博客',
+    description: '个人学习用途博客',
     base: '/',
     themeConfig: {
         sidebarDepth: 2,
@@ -13,7 +13,7 @@ module.exports = {
         ],
         sidebar: {
             '/share/': [
-                '/share/CI&CD',
+                '/share/CI_CD',
                 '/share/客户端缓存',
                 '/share/JS异步机制',
             ],
