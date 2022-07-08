@@ -130,7 +130,32 @@ while read oldrev newrev ref
 
 #### ③编辑 `gitlab-ci.yaml`
 
-![image-20220707214022359](./images/image-20220707214022359.png)
+```bash
+stages:          # List of stages for jobs, and their order of execution 
+  - build
+
+variables:
+  DIST_PATH: "/www/gitlab"
+  GIT_REPOS: "git@fanghaoming.com:moody/web-blog.git"
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  tags:
+    - release
+  only:
+    - tags
+  script:
+    - cd $DIST_PATH/web-blog
+    - git pull
+    - yarn install
+    - echo "————————————————Building——————————————————"
+    - yarn build
+    - echo "————————————————Done build————————————————"
+    - rm -rf /usr/local/nginx/html/web-blog
+    - cp -r /www/gitlab/web-blog/docs/.vuepress/dist /usr/local/nginx/html/web-blog
+```
+
+
 
 #### ④推送代码到gitlab，验证pipeline
 
@@ -159,11 +184,11 @@ debug:  gitlab-runner: the service is not installed
   3. ~~配置 git-hook 与编写构建/部署脚本~~
   4. ~~配置开发机器的部署源~~
 
-- ~~基于 gitlab-runner 的自动化流程~~
-  1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
-  2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
-  3. ~~在开发机器配置 gitlab CI 验证流程~~
-- 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）?
+  - ~~基于 gitlab-runner 的自动化流程~~
+    1. ~~按照文档在构建机器部署 gitlab/使用 gitlab 线上服务~~
+    2. ~~在构建机器部署 gitlab-runner 并注册到 gitlab 服务~~
+    3. ~~在开发机器配置 gitlab CI 验证流程~~
+  - 使用开发机器部署 gitlab-runner 使用公司 gitlab 验证流程（alternative）
 
 ## 参考
 
