@@ -28,6 +28,12 @@ module.exports = {
     description: '个人学习用途博客',
     base: '/',
     themeConfig: {
+        logo: '/assets/img/logo.png',
+        repo: 'https://github.com/FangHaoming/web-blog',
+        smoothScroll: true,
+        docsDir: 'docs',
+        docsBranch: 'develop',
+        editLinks: true,
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
         nav: [
@@ -39,7 +45,6 @@ module.exports = {
             },
             { text: 'vue', link: '/vue/' },
             { text: 'react', link: '/react/' },
-            { text: 'github', link: 'https://github.com/FangHaoming' },
         ],
         // sidebar: [
         //     {
@@ -60,11 +65,11 @@ module.exports = {
                 'JS异步机制',
             ],
             '/vue/': [
-                '/vue/响应式原理',
+                '响应式原理',
             ],
             '/react/': [
-                '/react/React Hooks',
-                '/react/React的基本思想',
+                'React Hooks',
+                'React的基本思想',
             ],
         },
         // vssueConfig: {
