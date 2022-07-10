@@ -28,7 +28,7 @@ module.exports = {
     description: '个人学习用途博客',
     base: '/',
     themeConfig: {
-        repo: 'web-blog',
+        repo: 'Fanghaoming/web-blog',
         smoothScroll: true,
         docsDir: 'docs',
         docsBranch: 'develop',
