@@ -69,7 +69,7 @@ export default {
 
   computed: {
     issueTitle() {
-      const url = document.location.toString()
+      const url = window.document.location.toString()
       return url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
     },
     shouldShowNavbar () {
@@ -124,6 +124,7 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
+    this.window = window;
   },
 
   methods: {
