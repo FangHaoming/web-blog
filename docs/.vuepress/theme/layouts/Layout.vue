@@ -38,7 +38,7 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
-        <Vssue class="theme-default-content content_default" />
+        <Vssue :title="issueTitle" />
       </template>
     </Page>
   </div>
@@ -68,6 +68,10 @@ export default {
   },
 
   computed: {
+    issueTitle() {
+      const url = document.location.toString()
+      return url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
+    },
     shouldShowNavbar () {
       const { themeConfig } = this.$site
       const { frontmatter } = this.$page
