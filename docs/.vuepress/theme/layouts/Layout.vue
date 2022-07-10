@@ -63,15 +63,12 @@ export default {
 
   data () {
     return {
-      isSidebarOpen: false
+      isSidebarOpen: false,
+      issueTitle: ''
     }
   },
 
   computed: {
-    issueTitle() {
-      const url = window.document.location.toString()
-      return url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
-    },
     shouldShowNavbar () {
       const { themeConfig } = this.$site
       const { frontmatter } = this.$page
@@ -124,10 +121,14 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
     })
-    this.window = window;
+    this.setIssueTitle()
   },
 
   methods: {
+    setIssueTitle() {
+      const url = window.document.location.toString()
+      this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
+    },
     toggleSidebar (to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
       this.$emit('toggle-sidebar', this.isSidebarOpen)
