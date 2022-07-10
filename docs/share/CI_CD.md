@@ -245,4 +245,4 @@ build:
 >
 > [Install GitLab Runner on Windows](https://docs.gitlab.com/runner/install/windows.html)
 
-<Vssue :title="$title" />
+<Vssue />
