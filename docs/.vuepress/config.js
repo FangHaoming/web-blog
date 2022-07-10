@@ -29,7 +29,6 @@ module.exports = {
     base: '/',
     themeConfig: {
         repo: 'Fanghaoming/web-blog',
-        smoothScroll: true,
         docsDir: 'docs',
         docsBranch: 'develop',
         editLinks: true,
