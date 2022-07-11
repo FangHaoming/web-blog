@@ -29,10 +29,10 @@ module.exports = {
     description: '个人学习用途博客',
     base: '/',
     themeConfig: {
-        // repo: 'Fanghaoming/web-blog',
-        // docsDir: 'docs',
-        // docsBranch: 'develop',
-        // editLinks: true,
+        repo: 'Fanghaoming/web-blog',
+        docsDir: 'docs',
+        docsBranch: 'develop',
+        editLinks: true,
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
         nav: [
