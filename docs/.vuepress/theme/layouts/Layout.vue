@@ -129,7 +129,11 @@ export default {
   methods: {
     setIssueTitle() {
       const url = window.document.location.toString()
-      this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
+      if(!url.includes('#')){
+        this.issueTitle = url.split('/')[url.split('/').length-2]
+      } else{
+        this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
+      }
     },
     toggleSidebar (to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
