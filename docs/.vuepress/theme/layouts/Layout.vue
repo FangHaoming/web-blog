@@ -38,6 +38,8 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
+      </template>
+      <template #bottom>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
       </template>
     </Page>
