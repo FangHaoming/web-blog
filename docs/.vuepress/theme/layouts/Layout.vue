@@ -39,9 +39,9 @@
       <template #bottom>
         <slot name="page-bottom" />
       </template>
-      <template #bottom>
+      <!-- <template #bottom>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
-      </template>
+      </template> -->
     </Page>
   </div>
 </template>
