@@ -40,6 +40,7 @@
         <slot name="page-bottom" />
       </template>
       <template #bottom>
+        <slot name="page-bottom" />
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
       </template>
     </Page>
@@ -129,7 +130,7 @@ export default {
   methods: {
     setIssueTitle() {
       const url = window.document.location.toString()
-      if(!url.includes('#')){
+      if(!url.includes('html')){
         this.issueTitle = url.split('/')[url.split('/').length-2]
       } else{
         this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
