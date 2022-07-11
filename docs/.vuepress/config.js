@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
+const moment = require('moment');
 
 const nav = []
 const sidebar = {}
@@ -88,7 +89,11 @@ module.exports = {
             autoCreateIssue: true,
         },
         '@vuepress/last-updated': {
-
+            transformer: (timestamp, lang) => {
+                const moment = require('moment')
+                moment.locale(lang)
+                return moment(timestamp).format('YYYY-MM-DD HH:mm')
+            }
         },
     },
 };

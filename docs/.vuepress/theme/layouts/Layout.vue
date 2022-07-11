@@ -120,6 +120,7 @@ export default {
   },
 
   mounted () {
+    this.setIssueTitle()
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
       this.setIssueTitle()
