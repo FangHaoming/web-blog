@@ -76,8 +76,8 @@ module.exports = {
     plugins: {
         '@vssue/vuepress-plugin-vssue': {
             platform: 'github',
-            owner: 'FangHaoming',
-            repo: 'web-blog',
+            owner: process.env.OWNER,
+            repo: process.env.REPO,
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
             autoCreateIssue: true,
