@@ -1,4 +1,4 @@
 /node_modules
 /docs/*/dist
 /.temp
-/docs/.vuepress/constants/Token.js
+/docs/.vuepress/constants/pr_key.js
