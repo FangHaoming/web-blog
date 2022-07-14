@@ -2,7 +2,8 @@ const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
-const Token = require('./constants/pr_key')
+const Token = require('./constants/token')
+require('dotenv').config()
 
 const nav = []
 const sidebar = {}
@@ -78,8 +79,8 @@ module.exports = {
             platform: 'github',
             owner: 'FangHaoming',
             repo: 'web-blog',
-            clientId: Token.clientId,
-            clientSecret: Token.clientSecret,
+            clientId: process.env.CLIENT_ID,
+            clientSecret: process.env.CLIENT_SECRET,
             autoCreateIssue: true,
         },
         '@vuepress/last-updated': {
