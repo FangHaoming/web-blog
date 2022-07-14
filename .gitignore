@@ -1,4 +1,4 @@
 /node_modules
 /docs/*/dist
 /.temp
-/docs/.vuepress/constants/config.js
+/docs/.vuepress/constants/Token.js

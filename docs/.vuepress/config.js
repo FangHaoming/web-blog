@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
-const Token = require('./constants/token')
+const Token = require('./constants/Token')
 
 const nav = []
 const sidebar = {}
