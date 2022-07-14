@@ -2,7 +2,6 @@ const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
-const Token = require('./constants/token')
 require('dotenv').config()
 
 const nav = []
