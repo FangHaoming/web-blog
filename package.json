@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vuepress dev docs",
+    "dev": "vuepress dev docs --temp .temp",
     "build": "vuepress build docs"
   },
   "keywords": [],
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@vssue/api-github-v3": "^1.4.7",
-    "@vssue/vuepress-plugin-vssue": "^1.4.8"
+    "@vssue/vuepress-plugin-vssue": "^1.4.8",
+    "moment": "^2.29.4"
   }
 }

@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
+const moment = require('moment');
 
 const nav = []
 const sidebar = {}
@@ -70,13 +71,6 @@ module.exports = {
                 'React的基本思想',
             ],
         },
-        // vssueConfig: {
-        //     platform: 'github',
-        //     ower: 'Fanghaoming',
-        //     repo: 'web-blog',
-        //     clientId: 'd8808fb381f7e94ba7c5',
-        //     clientSecret: '96657e87462d5286b26a80fb19617a0d5392aae6',
-        // }
     },
     plugins: {
         '@vssue/vuepress-plugin-vssue': {
@@ -86,6 +80,13 @@ module.exports = {
             clientId: 'd8808fb381f7e94ba7c5',
             clientSecret: '96657e87462d5286b26a80fb19617a0d5392aae6',
             autoCreateIssue: true,
+        },
+        '@vuepress/last-updated': {
+            transformer: (timestamp, lang) => {
+                const moment = require('moment')
+                moment.locale(lang)
+                return moment(timestamp).format('YYYY-MM-DD HH:mm')
+            }
         },
     },
 };

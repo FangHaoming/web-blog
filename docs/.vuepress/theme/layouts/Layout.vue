@@ -38,8 +38,6 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
-      </template>
-      <template #bottom>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
       </template>
     </Page>
@@ -120,6 +118,7 @@ export default {
   },
 
   mounted () {
+    this.setIssueTitle()
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
       this.setIssueTitle()
@@ -128,8 +127,8 @@ export default {
 
   methods: {
     setIssueTitle() {
-      const url = window.document.location.toString()
-      if(!url.includes('#')){
+      const url = decodeURI(window.document.location.toString())
+      if(!url.includes('html')){
         this.issueTitle = url.split('/')[url.split('/').length-2]
       } else{
         this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
