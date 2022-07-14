@@ -2,6 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
+const Token = require('./constants/token')
 
 const nav = []
 const sidebar = {}
@@ -77,8 +78,8 @@ module.exports = {
             platform: 'github',
             owner: 'FangHaoming',
             repo: 'web-blog',
-            clientId: 'd8808fb381f7e94ba7c5',
-            clientSecret: '96657e87462d5286b26a80fb19617a0d5392aae6',
+            clientId: Token.clientId,
+            clientSecret: Token.clientSecret,
             autoCreateIssue: true,
         },
         '@vuepress/last-updated': {
