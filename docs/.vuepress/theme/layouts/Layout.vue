@@ -4,6 +4,7 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
+    :onbeforeunload="() => confirm"
   >
     <Navbar
       v-if="shouldShowNavbar"
@@ -38,6 +39,11 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
+        <div class="theme-default-content red_container">
+          <a class="read_count" href="https://www.baidu.com">👀浏览次数</a>
+          <a class="read_count" href="https://www.baidu.com">👣登录人数</a>
+          <!-- <float-tip/> -->
+        </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
       </template>
     </Page>
@@ -122,7 +128,10 @@ export default {
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
       this.setIssueTitle()
-      
+      // window.onbeforeunload = e => {
+      //   console.log('onbefore')
+      //   return this.confirm()
+      // }
     })
   },
 
@@ -130,9 +139,9 @@ export default {
     setIssueTitle() {
       const url = decodeURI(window.document.location.toString())
       if(!url.includes('html')){
-        this.issueTitle = url.split('/')[url.split('/').length-2]
+        this.issueTitle = url.split('/')[url.split('/').length - 2 ]
       } else{
-        this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
+        this.issueTitle = url.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('.html'))
       }
     },
     toggleSidebar (to) {
@@ -162,3 +171,17 @@ export default {
   }
 }
 </script>
+
+<style>
+  .red_container {
+    position: relative;
+    padding: 50px 0 0 !important;
+    display: flex;
+    justify-content: space-between;
+  }
+  .read_count {
+    margin: 0!important;
+    display: inline-block;
+    color: #3eaf7c;
+  }
+</style>

@@ -3,6 +3,7 @@ const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
 require('dotenv').config()
+// const { webpackBundler } = require('@vuepress/bundler-webpack')
 
 const nav = []
 const sidebar = {}
@@ -90,4 +91,13 @@ module.exports = {
             }
         },
     },
+    // bundler: webpackBundler({
+    //     chainWebpack: (config) => {
+    //         config.module.rule('pug')
+    //             .test(/\.pug$/)
+    //             .use('pug-html-loader')
+    //             .loader('pug-html-loader')
+    //             .end()
+    //     }
+    // }),
 };
