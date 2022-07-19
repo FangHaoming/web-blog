@@ -1,4 +1,5 @@
 node_modules
 /docs/*/dist
 /.temp
+/docs/.vuepress/.cache
 .env

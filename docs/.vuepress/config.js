@@ -3,8 +3,11 @@ const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
 require('dotenv').config()
+const { defaultTheme } = require('vuepress')
+
 // const { webpackBundler } = require('@vuepress/bundler-webpack')
 
+const vssue = require('@vssue/vuepress-plugin-vssue')
 const nav = []
 const sidebar = {}
 
@@ -30,35 +33,23 @@ module.exports = {
     title: 'awesome-web',
     description: '个人学习用途博客',
     base: '/',
-    themeConfig: {
+    theme: defaultTheme({
         repo: 'Fanghaoming/web-blog',
         docsDir: 'docs',
         docsBranch: 'develop',
         editLinks: true,
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
-        nav: [
+        navbar: [
             { text: 'share', link: '/share/' },
             {
-                text: 'algorithm', items: [
+                text: 'algorithm', children: [
                     { text: '动态规划', link: '/share/' }
                 ]
             },
             { text: 'vue', link: '/vue/' },
             { text: 'react', link: '/react/' },
         ],
-        // sidebar: [
-        //     {
-        //         title: 'Group 1',   // 必要的
-        //         path: '/vue/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        //         collapsable: true, // 可选的, 默认值是 true,
-        //         sidebarDepth: 2,    // 可选的, 默认值是 1
-        //         children: [
-        //             '/share/CI_CD',
-        //             '/share/客户端缓存',
-        //         ]
-        //     }
-        // ]
         sidebar: {
             '/share/': [
                 'CI_CD',
@@ -73,24 +64,17 @@ module.exports = {
                 'React的基本思想',
             ],
         },
-    },
-    plugins: {
-        '@vssue/vuepress-plugin-vssue': {
+    }),
+    plugins: [
+        vssue({
             platform: 'github',
             owner: 'FangHaoming',
             repo: 'web-blog',
             clientId: process.env.CLIENT_ID,
             clientSecret: process.env.CLIENT_SECRET,
             autoCreateIssue: true,
-        },
-        '@vuepress/last-updated': {
-            transformer: (timestamp, lang) => {
-                const moment = require('moment')
-                moment.locale(lang)
-                return moment(timestamp).format('YYYY-MM-DD HH:mm')
-            }
-        },
-    },
+        }),
+    ]
     // bundler: webpackBundler({
     //     chainWebpack: (config) => {
     //         config.module.rule('pug')

@@ -244,4 +244,3 @@ build:
 > [GitLab CI 之 Runner 的 Executor 該如何選擇？](https://chengweichen.com/2021/03/gitlab-ci-executor.html)
 >
 > [Install GitLab Runner on Windows](https://docs.gitlab.com/runner/install/windows.html)
-
