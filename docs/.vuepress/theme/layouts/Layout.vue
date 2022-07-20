@@ -22,8 +22,8 @@
       <template #bottom>
         <slot name="page-bottom" />
         <div class="theme-default-content red_container" v-if="isShowCustomer">
-          <a class="read_count" href="https://www.baidu.com">👀浏览次数</a>
-          <a class="read_count" href="https://www.baidu.com">👣登录人数</a>
+          <a class="read_count" href="https://www.baidu.com">👀浏览次数<span ref="lookCount">sss</span></a>
+          <a class="read_count" href="https://www.baidu.com">👣登录人数<span ref="loginCount"></span></a>
           <!-- <float-tip/> -->
         </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
@@ -176,6 +176,8 @@
     },
 
     mounted() {
+      this.$refs.lookCount.innerText = 9999
+      this.$refs.loginCount.innerText = 9999
       this.setIssueTitle()
       this.$router.beforeEach(async (to, from, next) => {
         this.setIsShowPage(to)
@@ -205,12 +207,17 @@
     position: relative;
     padding: 50px 0 0 !important;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .read_count {
-    margin: 0 !important;
+    margin: 0 30px !important;
     display: inline-block;
     color: #3eaf7c;
+    font-weight: 500;
+  }
+  .read_count > span {
+    margin-left: 5px;
+    color: #4e6e8e;
   }
 </style>
