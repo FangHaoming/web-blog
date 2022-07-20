@@ -176,6 +176,7 @@
     },
 
     mounted() {
+      this.setIssueTitle()
       this.$router.beforeEach(async (to, from, next) => {
         this.setIsShowPage(to)
         this.setIsShowCustomer(to)
