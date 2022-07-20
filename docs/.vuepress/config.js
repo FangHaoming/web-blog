@@ -76,7 +76,7 @@ module.exports = {
     },
     plugins: {
         '@vssue/vuepress-plugin-vssue': {
-            platform: 'github',
+            platform: 'github-v4',
             owner: process.env.OWNER,
             repo: process.env.REPO,
             clientId: process.env.CLIENT_ID,
