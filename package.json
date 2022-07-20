@@ -14,7 +14,6 @@
     "vuepress": "^1.9.7"
   },
   "dependencies": {
-    "@octokit/core": "^4.0.4",
     "@vssue/api-github-v3": "^1.4.7",
     "@vssue/vuepress-plugin-vssue": "^1.4.8",
     "dotenv": "^16.0.1",
