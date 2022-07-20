@@ -160,6 +160,7 @@
         )
       },
       setIsShowPage(to) {
+        console.log(to.fullPath)
         if (NOT_SHOW_PAGE.includes(to.fullPath)) {
           this.isShowPage = false
         } else {
