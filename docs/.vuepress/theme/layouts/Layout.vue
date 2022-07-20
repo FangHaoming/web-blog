@@ -4,6 +4,7 @@
     :class="pageClasses"
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
+    v-if="isShowPage"
   >
     <Navbar
       v-if="shouldShowNavbar"
@@ -38,6 +39,11 @@
       </template>
       <template #bottom>
         <slot name="page-bottom" />
+        <div class="theme-default-content red_container" v-if="isShowCustomer">
+          <a class="read_count" href="https://www.baidu.com">👀浏览次数</a>
+          <a class="read_count" href="https://www.baidu.com">👣登录人数</a>
+          <!-- <float-tip/> -->
+        </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
       </template>
     </Page>
@@ -50,6 +56,8 @@ import Navbar from '@theme/components/Navbar.vue'
 import Page from '@theme/components/Page.vue'
 import Sidebar from '@theme/components/Sidebar.vue'
 import { resolveSidebarItems } from './util'
+import axios from 'axios'
+import API from '../../api'
 
 export default {
   name: 'Layout',
@@ -64,7 +72,9 @@ export default {
   data () {
     return {
       isSidebarOpen: false,
-      issueTitle: ''
+      issueTitle: '',
+      isShowCustomer: true,
+      isShowPage: true,
     }
   },
 
@@ -118,11 +128,15 @@ export default {
   },
 
   mounted () {
-    this.setIssueTitle()
+    this.$router.beforeEach(() => {
+      this.queryUser()
+    })
     this.$router.afterEach(() => {
       this.isSidebarOpen = false
       this.setIssueTitle()
-      
+      // axios.get('https://api.github.com/repos/FangHaoming/web-blog/issues/18/comments').then((res) => {
+      //   // console.dir(res)
+      // })
     })
   },
 
@@ -134,6 +148,34 @@ export default {
       } else{
         this.issueTitle = url.substring(url.lastIndexOf('/')+1, url.lastIndexOf('.html'))
       }
+    },
+    setIsShowCustomerAndPage() {
+      const url = decodeURI(window.document.location.toString())
+      const notShowCustomer = [
+        '/diary/',
+      ]
+      const notShowPage = [
+        '/diary/',
+      ]
+      const authUser = [
+        'FangHaoming',
+      ]
+      if (Array.prototype.some.call(notShowCustomer, (v) => url.includes(v))) {
+        this.isShowCustomer = false
+      } else {
+        this.isShowCustomer = true
+      }
+      if (Array.prototype.some.call(notShowPage, (v) => url.includes(v)) && Array.prototype.some.call(authUser, (v) => this.userName === v)) {
+        this.isShowPage = true
+      } else {
+        this.isShowPage = false
+      }
+    },
+    async queryUser() {
+      const { data: { login }} = await API.Github.queryUser()
+      this.userName = login
+      console.log(`userName:${login}`)
+      this.setIsShowCustomerAndPage()
     },
     toggleSidebar (to) {
       this.isSidebarOpen = typeof to === 'boolean' ? to : !this.isSidebarOpen
@@ -162,3 +204,17 @@ export default {
   }
 }
 </script>
+
+<style>
+  .red_container {
+    position: relative;
+    padding: 50px 0 0 !important;
+    display: flex;
+    justify-content: space-between;
+  }
+  .read_count {
+    margin: 0!important;
+    display: inline-block;
+    color: #3eaf7c;
+  }
+</style>
