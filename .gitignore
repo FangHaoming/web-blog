@@ -2,5 +2,5 @@ node_modules
 /docs/*/dist
 /.temp
 .env
-/docs/diary
+/docs/todo
 yarn-error.log*

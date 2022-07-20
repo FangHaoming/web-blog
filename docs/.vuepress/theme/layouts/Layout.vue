@@ -1,5 +1,5 @@
 <template>
-  <div class="theme-container" :class="pageClasses" @touchstart="onTouchStart" @touchend="onTouchEnd">
+  <div class="theme-container" :class="pageClasses" @touchstart="onTouchStart" @touchend="onTouchEnd" v-if="isShowPage">
     <Navbar v-if="shouldShowNavbar" @toggle-sidebar="toggleSidebar" />
 
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
@@ -40,6 +40,11 @@
   import { resolveSidebarItems } from './util'
   import axios from 'axios'
   import getAxios from '../../utils/getAxios.js'
+  import {
+    TODO_READER,
+    NOT_SHOW_PAGE,
+    NOT_SHOW_CUSTOMER_PAGE,
+  } from '../../constants'
 
   export default {
     name: 'Layout',
@@ -54,7 +59,9 @@
     data() {
       return {
         isSidebarOpen: false,
-        issueTitle: ''
+        issueTitle: '',
+        isShowCustomer: true,
+        isShowPage: false,
       }
     },
 
@@ -107,23 +114,6 @@
       }
     },
 
-    mounted() {
-      this.$router.beforeEach(async (to, from, next) => {
-        if (this.getAuth()) {
-          const res = await this.getGithubAxios().get('/user')
-          console.dir(res)
-        }
-        next()
-      })
-      this.$router.afterEach(() => {
-        this.isSidebarOpen = false
-        this.setIssueTitle()
-        // axios.get('https://api.github.com/repos/FangHaoming/web-blog/issues/18/comments').then((res) => {
-        //   console.dir(res)
-        // })
-      })
-    },
-
     methods: {
       setIssueTitle() {
         const url = decodeURI(window.document.location.toString())
@@ -169,7 +159,43 @@
           })
         )
       },
-    }
+      setIsShowPage(to) {
+        if (NOT_SHOW_PAGE.includes(to.fullPath)) {
+          this.isShowPage = false
+        } else {
+          this.isShowPage = true
+        }
+      },
+      setIsShowCustomer(to) {
+        if (NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath)) {
+          this.isShowCustomer = false
+        } else {
+          this.isShowCustomer = true
+        }
+      },
+    },
+
+    mounted() {
+      this.$router.beforeEach(async (to, from, next) => {
+        this.setIsShowPage(to)
+        this.setIsShowCustomer(to)
+        if (this.getAuth()) {
+          const res = await this.getGithubAxios().get('/user')
+          const { data: { login } } = res
+          if (TODO_READER.includes(login) && NOT_SHOW_PAGE.includes(to.fullPath)) {
+            this.isShowPage = true
+          }
+        }
+        next()
+      })
+      this.$router.afterEach(() => {
+        this.isSidebarOpen = false
+        this.setIssueTitle()
+        // axios.get('https://api.github.com/repos/FangHaoming/web-blog/issues/18/comments').then((res) => {
+        //   console.dir(res)
+        // })
+      })
+    },
   }
 </script>
 

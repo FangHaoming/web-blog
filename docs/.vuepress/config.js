@@ -45,7 +45,7 @@ module.exports = {
             },
             { text: 'vue', link: '/vue/' },
             { text: 'react', link: '/react/' },
-            { text: 'Diary', link: '/diary/' },
+            { text: 'TODO', link: '/todo/' },
         ],
         // sidebar: [
         //     {
