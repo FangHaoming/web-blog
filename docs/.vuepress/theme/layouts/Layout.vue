@@ -22,7 +22,7 @@
       <template #bottom>
         <slot name="page-bottom" />
         <div class="theme-default-content red_container" v-if="isShowCustomer">
-          <a class="read_count" href="https://www.baidu.com">👀浏览次数<span ref="lookCount">sss</span></a>
+          <a class="read_count" href="https://www.baidu.com">👀浏览次数<span ref="lookCount"></span></a>
           <a class="read_count" href="https://www.baidu.com">👣登录人数<span ref="loginCount"></span></a>
           <!-- <float-tip/> -->
         </div>
@@ -211,7 +211,7 @@
   }
 
   .read_count {
-    margin: 0 30px !important;
+    margin: 0 10px !important;
     display: inline-block;
     color: #3eaf7c;
     font-weight: 500;
