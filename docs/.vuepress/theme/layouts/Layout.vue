@@ -182,7 +182,7 @@
       this.$router.beforeEach(async (to, from, next) => {
         this.setIsShowPage(to)
         this.setIsShowCustomer(to)
-        if (this.getAuth()) {
+        if (this.getAuth() && NOT_SHOW_PAGE.includes(to.fullPath)) {
           const res = await this.getGithubAxios().get('/user')
           const { data: { login } } = res
           if (TODO_READER.includes(login) && NOT_SHOW_PAGE.includes(to.fullPath)) {
