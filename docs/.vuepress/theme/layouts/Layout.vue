@@ -211,7 +211,7 @@
       updateCountBeforeClose() {
         if (!this.login) return
         let oldMember = new Set(this.countObj.loginMember)
-        oldMember.add(login)
+        oldMember.add(this.login)
         this.countObj.loginMember = [...oldMember]
         this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
       },
