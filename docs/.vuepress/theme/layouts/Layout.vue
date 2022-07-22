@@ -22,8 +22,8 @@
       <template #bottom>
         <slot name="page-bottom" />
         <div class="theme-default-content red_container" v-if="isShowCustomer">
-          <a class="read_count" href="https://www.baidu.com">👀浏览次数<span ref="lookCount"></span></a>
-          <a class="read_count" href="https://www.baidu.com">👣登录人数<span ref="loginCount"></span></a>
+          <a class="read_count" href="" onclick="getCount(true)">👀浏览次数<span ref="lookCount"></span></a>
+          <a class="read_count" href="" onclick="getCount(true)">👣登录人数<span ref="loginCount"></span></a>
           <!-- <float-tip/> -->
         </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
@@ -41,6 +41,7 @@
   import axios from 'axios'
   import getAxios from '../../utils/getAxios.js'
   import {
+    AUTHOR,
     TODO_READER,
     NOT_SHOW_PAGE,
     NOT_SHOW_CUSTOMER_PAGE,
@@ -149,6 +150,16 @@
       getAuth() {
         return localStorage.getItem('Vssue.github.access_token')
       },
+      async getLogin() {
+        if (this.getAuth() && !this.login) {
+          const res = await this.getGithubAxios().get('/user')
+          const { data: { login } } = res
+          this.login = login
+          let oldMember = new Set(this.countObj.loginMember)
+          oldMember.add(login)
+          this.countObj.loginMember = [...oldMember]
+        }
+      },
       getGithubAxios() {
         return getAxios(
           axios.create({
@@ -165,6 +176,9 @@
         } else {
           this.isShowPage = true
         }
+        if (TODO_READER.includes(this.login) && NOT_SHOW_PAGE.includes(to.fullPath)) {
+          this.isShowPage = true
+        }
       },
       setIsShowCustomer(to) {
         if (NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath)) {
@@ -173,32 +187,61 @@
           this.isShowCustomer = true
         }
       },
+      async getCount(refresh) {
+        if (!this.countObj || refresh) {
+          const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
+          const { data: { body } } = res
+          const { message } = res
+          console.log(message)
+          this.countObj = JSON.parse(body)
+        }
+        this.$nextTick(() => {
+          if (this.$refs.lookCount) {
+            this.$refs.lookCount.innerText = this.countObj.lookCount[this.issueTitle] || 0
+            this.$refs.loginCount.innerText = this.countObj.loginMember.length
+          }
+        })
+      },
+      updateCount() {
+        if (!this.countObj) return
+        if (this.login === AUTHOR) return
+        if (!this.countObj.lookCount[this.issueTitle]) {
+          this.countObj.lookCount[this.issueTitle] = 1
+        } else {
+          this.countObj.lookCount[this.issueTitle]++
+        }
+      },
+      updateCountBeforeClose() {
+        if (!this.countObj) return
+        this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+      },
+
     },
 
     mounted() {
-      this.$refs.lookCount.innerText = 9999
-      this.$refs.loginCount.innerText = 9999
       this.setIssueTitle()
       this.$router.beforeEach(async (to, from, next) => {
+        this.getLogin()
         this.setIsShowPage(to)
         this.setIsShowCustomer(to)
-        if (this.getAuth() && NOT_SHOW_PAGE.includes(to.fullPath)) {
-          const res = await this.getGithubAxios().get('/user')
-          const { data: { login } } = res
-          if (TODO_READER.includes(login) && NOT_SHOW_PAGE.includes(to.fullPath)) {
-            this.isShowPage = true
-          }
-        }
         next()
       })
-      this.$router.afterEach(() => {
+      this.$router.afterEach((to, from) => {
         this.isSidebarOpen = false
         this.setIssueTitle()
-        // axios.get('https://api.github.com/repos/FangHaoming/web-blog/issues/18/comments').then((res) => {
-        //   console.dir(res)
-        // })
       })
+      window.addEventListener('beforeunload', (e) => {
+        e.preventDefault()
+        this.updateCountBeforeClose()
+      });
     },
+
+    watch: {
+      issueTitle() {
+        this.getCount()
+        this.updateCount()
+      }
+    }
   }
 </script>
 
@@ -216,7 +259,8 @@
     color: #3eaf7c;
     font-weight: 500;
   }
-  .read_count > span {
+
+  .read_count>span {
     margin-left: 5px;
     color: #4e6e8e;
   }
