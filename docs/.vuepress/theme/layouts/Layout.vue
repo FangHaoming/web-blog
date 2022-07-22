@@ -188,11 +188,9 @@
         }
       },
       async getCount(refresh) {
-        if (!this.countObj || refresh) {
+        if (this.login && (!this.countObj || refresh)) {
           const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
           const { data: { body } } = res
-          const { message } = res
-          console.log(message)
           this.countObj = JSON.parse(body)
         }
         this.$nextTick(() => {
@@ -203,7 +201,7 @@
         })
       },
       updateCount() {
-        if (!this.countObj) return
+        if (!this.login) return
         if (this.login === AUTHOR) return
         if (!this.countObj.lookCount[this.issueTitle]) {
           this.countObj.lookCount[this.issueTitle] = 1
@@ -212,7 +210,7 @@
         }
       },
       updateCountBeforeClose() {
-        if (!this.countObj) return
+        if (!this.login) return
         this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
       },
 
