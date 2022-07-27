@@ -45,6 +45,7 @@
     TODO_READER,
     NOT_SHOW_PAGE,
     NOT_SHOW_CUSTOMER_PAGE,
+    VUE_APP_AUTH
   } from '../../constants'
 
   export default {
@@ -155,18 +156,18 @@
           const res = await this.getGithubAxios().get('/user')
           const { data: { login } } = res
           this.login = login
-          let oldMember = new Set(this.countObj.loginMember)
+          const oldMember = new Set(this.countObj.loginMember)
           oldMember.add(this.login)
           this.countObj.loginMember = [...oldMember]
           localStorage.setItem('countObj', JSON.stringify(this.countObj))
         }
       },
-      getGithubAxios() {
+      getGithubAxios(auth) {
         return getAxios(
           axios.create({
             baseURL: 'https://api.github.com/',
             headers: {
-              authorization: 'token ' + localStorage.getItem('Vssue.github.access_token')
+              authorization: auth ? 'token ' + auth : 'token ' + localStorage.getItem('Vssue.github.access_token')
             }
           })
         )
@@ -203,7 +204,7 @@
           }
         })
       },
-      updateCount() {
+      async updateCount() {
         if (!this.login) return
         if (this.login === AUTHOR) return
         if (!this.countObj.lookCount[this.issueTitle]) {
@@ -213,9 +214,21 @@
         }
         localStorage.setItem('countObj', JSON.stringify(this.countObj))
       },
-      updateCountBeforeClose() {
-        if (!this.countObj) return
-        this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+      async updateCountBeforeClose() {
+        !this.countObj && (this.countObj = JSON.parse(localStorage.getItem('countObj')))
+        if (!this.getAuth() || !this.countObj) return
+        const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
+        const { data: { body } } = res
+        const oldObj = JSON.parse(body)
+        Reflect.ownKeys(oldObj.lookCount).forEach((v) => {
+          if (oldObj.lookCount[v]) {
+            this.countObj.lookCount[v] = this.countObj.lookCount[v] ? Math.max(this.countObj.lookCount[v], oldObj.lookCount[v]) : oldObj.lookCount[v]
+          } else {
+            this.countObj.lookCount[v] = this.countObj.lookCount[v]
+          }
+        })
+        this.countObj.loginMember = [...new Set([...oldObj.loginMember, ...this.countObj.loginMember])]
+        await this.getGithubAxios(VUE_APP_AUTH).patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
       },
       init() {
         this.setIssueTitle()
@@ -235,9 +248,9 @@
         this.isSidebarOpen = false
         this.setIssueTitle()
       })
-      window.addEventListener('beforeunload', (e) => {
+      window.addEventListener('beforeunload', async (e) => {
         e.preventDefault()
-        this.updateCountBeforeClose()
+        await this.updateCountBeforeClose()
       })
     },
 
@@ -245,6 +258,7 @@
       issueTitle() {
         this.getCount()
         this.updateCount()
+        this.updateCountBeforeClose()
       }
     }
   }
