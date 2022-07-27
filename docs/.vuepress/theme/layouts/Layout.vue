@@ -155,6 +155,10 @@
           const res = await this.getGithubAxios().get('/user')
           const { data: { login } } = res
           this.login = login
+          let oldMember = new Set(this.countObj.loginMember)
+          oldMember.add(this.login)
+          this.countObj.loginMember = [...oldMember]
+          localStorage.setItem('countObj', JSON.stringify(this.countObj))
         }
       },
       getGithubAxios() {
@@ -185,12 +189,12 @@
         }
       },
       async getCount(refresh) {
-        this.countObj = JSON.parse(localStorage.getItem('coutObj'))
+        this.countObj = JSON.parse(localStorage.getItem('countObj'))
         if (this.login && (!this.countObj || refresh)) {
           const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
           const { data: { body } } = res
           this.countObj = JSON.parse(body)
-          localStorage.setItem('coutObj', body)
+          localStorage.setItem('countObj', body)
         }
         this.$nextTick(() => {
           if (this.$refs.lookCount) {
@@ -207,12 +211,10 @@
         } else {
           this.countObj.lookCount[this.issueTitle]++
         }
+        localStorage.setItem('countObj', JSON.stringify(this.countObj))
       },
       updateCountBeforeClose() {
-        if (!this.login) return
-        let oldMember = new Set(this.countObj.loginMember)
-        oldMember.add(this.login)
-        this.countObj.loginMember = [...oldMember]
+        if (!this.countObj) return
         this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
       },
       init() {
