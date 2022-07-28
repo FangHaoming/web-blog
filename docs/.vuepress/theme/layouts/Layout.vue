@@ -22,8 +22,8 @@
       <template #bottom>
         <slot name="page-bottom" />
         <div class="theme-default-content red_container" v-if="isShowCustomer">
-          <a class="read_count" href="" onclick="getCount(true)">👀浏览次数<span ref="lookCount"></span></a>
-          <a class="read_count" href="" onclick="getCount(true)">👣登录人数<span ref="loginCount"></span></a>
+          <a class="read_count" href="">👀浏览次数<span ref="lookCount"></span></a>
+          <a class="read_count" href="">👣登录人数<span ref="loginCount"></span></a>
           <!-- <float-tip/> -->
         </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
@@ -189,14 +189,17 @@
           this.isShowCustomer = true
         }
       },
-      async getCount(refresh) {
+      async getCount() {
         this.countObj = JSON.parse(localStorage.getItem('countObj'))
-        if (this.login && (!this.countObj || refresh)) {
+        if (this.login) {
           const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
           const { data: { body } } = res
           this.countObj = JSON.parse(body)
           localStorage.setItem('countObj', body)
         }
+        this.setCount()
+      },
+      setCount() {
         this.$nextTick(() => {
           if (this.$refs.lookCount) {
             this.$refs.lookCount.innerText = this.countObj.lookCount[this.issueTitle] || 0
@@ -229,6 +232,7 @@
         })
         this.countObj.loginMember = [...new Set([...oldObj.loginMember, ...this.countObj.loginMember])]
         await this.getGithubAxios(VUE_APP_AUTH).patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+        this.setCount()
       },
       init() {
         this.setIssueTitle()
