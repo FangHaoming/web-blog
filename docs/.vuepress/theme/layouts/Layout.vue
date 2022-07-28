@@ -189,16 +189,6 @@
           this.isShowCustomer = true
         }
       },
-      async getCount() {
-        this.countObj = JSON.parse(localStorage.getItem('countObj'))
-        if (this.login) {
-          const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
-          const { data: { body } } = res
-          this.countObj = JSON.parse(body)
-          localStorage.setItem('countObj', body)
-        }
-        this.setCount()
-      },
       setCount() {
         this.$nextTick(() => {
           if (this.$refs.lookCount) {
@@ -216,6 +206,7 @@
           this.countObj.lookCount[this.issueTitle]++
         }
         localStorage.setItem('countObj', JSON.stringify(this.countObj))
+        this.setCount()
       },
       async updateCountBeforeClose() {
         !this.countObj && (this.countObj = JSON.parse(localStorage.getItem('countObj')))
@@ -260,7 +251,6 @@
 
     watch: {
       issueTitle() {
-        this.getCount()
         this.updateCount()
         this.updateCountBeforeClose()
       }
