@@ -239,7 +239,7 @@
       },
       async init() {
         this.setIssueTitle()
-        this.getLogin()
+        await this.getLogin()
         await this.getCount()
         this.setCount()
       },
