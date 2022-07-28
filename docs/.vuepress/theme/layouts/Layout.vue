@@ -189,6 +189,16 @@
           this.isShowCustomer = true
         }
       },
+      async getCount() {
+        if (!this.getAuth()) return
+        const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
+        const { data: { body } } = res
+        if (!this.countObj) {
+          this.countObj = JSON.parse(body)
+          localStorage.setItem('countObj', body)
+        }
+        return body
+      },
       setCount() {
         this.$nextTick(() => {
           if (this.$refs.lookCount) {
@@ -198,23 +208,23 @@
         })
       },
       async updateCount() {
+        this.countObj = JSON.parse(localStorage.getItem('countObj'))
         if (!this.login) return
         if (this.login === AUTHOR) return
+        if (!this.countObj) return
         if (!this.countObj.lookCount[this.issueTitle]) {
           this.countObj.lookCount[this.issueTitle] = 1
         } else {
           this.countObj.lookCount[this.issueTitle]++
         }
         localStorage.setItem('countObj', JSON.stringify(this.countObj))
-        this.setCount()
       },
-      async updateCountBeforeClose() {
-        !this.countObj && (this.countObj = JSON.parse(localStorage.getItem('countObj')))
+      async updateRemoteCount() {
         if (!this.getAuth() || !this.countObj) return
-        const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
-        const { data: { body } } = res
-        const oldObj = JSON.parse(body)
-        Reflect.ownKeys(oldObj.lookCount).forEach((v) => {
+        const res = await this.getCount()
+        const oldObj = JSON.parse(res)
+        const keys = new Set([...Reflect.ownKeys(oldObj.lookCount), ...Reflect.ownKeys(this.countObj.lookCount)]);
+        [...keys].forEach((v) => {
           if (oldObj.lookCount[v]) {
             this.countObj.lookCount[v] = this.countObj.lookCount[v] ? Math.max(this.countObj.lookCount[v], oldObj.lookCount[v]) : oldObj.lookCount[v]
           } else {
@@ -223,16 +233,19 @@
         })
         this.countObj.loginMember = [...new Set([...oldObj.loginMember, ...this.countObj.loginMember])]
         await this.getGithubAxios(VUE_APP_AUTH).patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+        localStorage.setItem('countObj', JSON.stringify(this.countObj))
         this.setCount()
       },
-      init() {
+      async init() {
         this.setIssueTitle()
         this.getLogin()
+        await this.getCount()
+        this.setCount()
       },
     },
 
-    mounted() {
-      this.init()
+    async mounted() {
+      await this.init()
       this.$router.beforeEach(async (to, from, next) => {
         this.getLogin()
         this.setIsShowPage(to)
@@ -245,14 +258,14 @@
       })
       window.addEventListener('beforeunload', async (e) => {
         e.preventDefault()
-        await this.updateCountBeforeClose()
+        await this.updateRemoteCount()
       })
     },
 
     watch: {
       issueTitle() {
         this.updateCount()
-        this.updateCountBeforeClose()
+        this.updateRemoteCount()
       }
     }
   }
