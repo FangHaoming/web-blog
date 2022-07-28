@@ -257,10 +257,7 @@
       this.$router.afterEach((to, from) => {
         this.isSidebarOpen = false
         this.setIssueTitle()
-      })
-      window.addEventListener('beforeunload', async (e) => {
-        e.preventDefault()
-        await this.updateRemoteCount()
+        this.setIsShowCustomer(from)
       })
     },
 
