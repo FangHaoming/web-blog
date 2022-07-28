@@ -183,7 +183,7 @@
         }
       },
       setIsShowCustomer(to) {
-        if (NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
+        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
           this.isShowCustomer = false
         } else {
           this.isShowCustomer = true
@@ -246,6 +246,7 @@
 
     async mounted() {
       await this.init()
+      this.setIsShowCustomer()
       this.$router.beforeEach(async (to, from, next) => {
         this.getLogin()
         this.setIsShowPage(to)
