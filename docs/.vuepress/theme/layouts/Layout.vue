@@ -160,6 +160,7 @@
           oldMember.add(this.login)
           this.countObj.loginMember = [...oldMember]
           localStorage.setItem('countObj', JSON.stringify(this.countObj))
+          this.isShowCustomer = true
         }
       },
       getGithubAxios(auth) {
@@ -248,7 +249,7 @@
       await this.init()
       this.setIsShowCustomer()
       this.$router.beforeEach(async (to, from, next) => {
-        this.getLogin()
+        await this.getLogin()
         this.setIsShowPage(to)
         this.setIsShowCustomer(to)
         next()
