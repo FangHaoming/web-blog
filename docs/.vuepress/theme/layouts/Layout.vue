@@ -157,7 +157,6 @@
           const res = await this.getGithubAxios().get('/user')
           const { data: { login } } = res
           this.login = login
-          location.reload()
         }
       },
       getGithubAxios(auth) {
