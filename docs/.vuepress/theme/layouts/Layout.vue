@@ -156,10 +156,6 @@
           const res = await this.getGithubAxios().get('/user')
           const { data: { login } } = res
           this.login = login
-          const oldMember = new Set(this.countObj.loginMember)
-          oldMember.add(this.login)
-          this.countObj.loginMember = [...oldMember]
-          localStorage.setItem('countObj', JSON.stringify(this.countObj))
         }
       },
       getGithubAxios(auth) {
@@ -183,7 +179,7 @@
         }
       },
       setIsShowCustomer(to) {
-        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
+        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login || this.login === AUTHOR) {
           this.isShowCustomer = false
         } else {
           this.isShowCustomer = true
@@ -218,6 +214,7 @@
           this.countObj.lookCount[this.issueTitle]++
         }
         localStorage.setItem('countObj', JSON.stringify(this.countObj))
+        this.setCount()
       },
       async updateRemoteCount() {
         if (!this.getAuth() || !this.countObj) return
@@ -231,7 +228,7 @@
             this.countObj.lookCount[v] = this.countObj.lookCount[v]
           }
         })
-        this.countObj.loginMember = [...new Set([...oldObj.loginMember, ...this.countObj.loginMember])]
+        this.countObj.loginMember = [...new Set([...oldObj.loginMember, this.login])]
         await this.getGithubAxios(VUE_APP_AUTH).patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
         localStorage.setItem('countObj', JSON.stringify(this.countObj))
         this.setCount()
@@ -263,6 +260,11 @@
       issueTitle() {
         this.updateCount()
         this.updateRemoteCount()
+      },
+      login(val) {
+        if(val && val !==  AUTHOR) {
+          this.isShowCustomer = true
+        }
       }
     }
   }
