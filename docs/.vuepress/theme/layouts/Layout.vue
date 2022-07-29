@@ -180,7 +180,7 @@
         }
       },
       setIsShowCustomer(to) {
-        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login || this.login === AUTHOR) {
+        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
           this.isShowCustomer = false
         } else {
           this.isShowCustomer = true
