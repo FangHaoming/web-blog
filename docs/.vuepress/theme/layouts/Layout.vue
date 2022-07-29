@@ -64,6 +64,7 @@
         issueTitle: '',
         isShowCustomer: true,
         isShowPage: true,
+        login: '',
       }
     },
 
