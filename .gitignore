@@ -4,4 +4,4 @@ node_modules
 .env
 /docs/todo
 yarn-error.log*
-/docs/.vuepress/constants/auth.js
+/docs/.vuepress/constants/token.js
