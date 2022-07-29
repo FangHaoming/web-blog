@@ -22,8 +22,8 @@
       <template #bottom>
         <slot name="page-bottom" />
         <div class="theme-default-content red_container" v-if="isShowCustomer">
-          <a class="read_count" href="" onclick="getCount(true)">👀浏览次数<span ref="lookCount"></span></a>
-          <a class="read_count" href="" onclick="getCount(true)">👣登录人数<span ref="loginCount"></span></a>
+          <a class="read_count" href="">👀浏览次数<span ref="lookCount"></span></a>
+          <a class="read_count" href="">👣登录人数<span ref="loginCount"></span></a>
           <!-- <float-tip/> -->
         </div>
         <Vssue :title="issueTitle" :key="issueTitle" class="theme-default-content content_default" />
@@ -45,6 +45,7 @@
     TODO_READER,
     NOT_SHOW_PAGE,
     NOT_SHOW_CUSTOMER_PAGE,
+    VUE_APP_AUTH
   } from '../../constants'
 
   export default {
@@ -63,6 +64,7 @@
         issueTitle: '',
         isShowCustomer: true,
         isShowPage: true,
+        login: '',
       }
     },
 
@@ -157,12 +159,12 @@
           this.login = login
         }
       },
-      getGithubAxios() {
+      getGithubAxios(auth) {
         return getAxios(
           axios.create({
             baseURL: 'https://api.github.com/',
             headers: {
-              authorization: 'token ' + localStorage.getItem('Vssue.github.access_token')
+              authorization: auth ? 'token ' + auth : 'token ' + localStorage.getItem('Vssue.github.access_token')
             }
           })
         )
@@ -178,20 +180,23 @@
         }
       },
       setIsShowCustomer(to) {
-        if (NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
+        if (to && NOT_SHOW_CUSTOMER_PAGE.includes(to.fullPath) || !this.login) {
           this.isShowCustomer = false
         } else {
           this.isShowCustomer = true
         }
       },
-      async getCount(refresh) {
-        this.countObj = JSON.parse(localStorage.getItem('coutObj'))
-        if (this.login && (!this.countObj || refresh)) {
-          const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
-          const { data: { body } } = res
+      async getCount() {
+        if (!this.getAuth()) return
+        const res = await this.getGithubAxios().get('/repos/FangHaoming/web-blog/issues/comments/1190996607')
+        const { data: { body } } = res
+        if (!this.countObj) {
           this.countObj = JSON.parse(body)
-          localStorage.setItem('coutObj', body)
+          localStorage.setItem('countObj', body)
         }
+        return body
+      },
+      setCount() {
         this.$nextTick(() => {
           if (this.$refs.lookCount) {
             this.$refs.lookCount.innerText = this.countObj.lookCount[this.issueTitle] || 0
@@ -199,32 +204,49 @@
           }
         })
       },
-      updateCount() {
+      async updateCount() {
+        this.countObj = JSON.parse(localStorage.getItem('countObj'))
         if (!this.login) return
         if (this.login === AUTHOR) return
+        if (!this.countObj) return
         if (!this.countObj.lookCount[this.issueTitle]) {
           this.countObj.lookCount[this.issueTitle] = 1
         } else {
           this.countObj.lookCount[this.issueTitle]++
         }
+        localStorage.setItem('countObj', JSON.stringify(this.countObj))
+        this.setCount()
       },
-      updateCountBeforeClose() {
-        if (!this.login) return
-        let oldMember = new Set(this.countObj.loginMember)
-        oldMember.add(login)
-        this.countObj.loginMember = [...oldMember]
-        this.getGithubAxios().patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+      async updateRemoteCount() {
+        if (!this.getAuth() || !this.countObj) return
+        const res = await this.getCount()
+        const oldObj = JSON.parse(res)
+        const keys = new Set([...Reflect.ownKeys(oldObj.lookCount), ...Reflect.ownKeys(this.countObj.lookCount)]);
+        [...keys].forEach((v) => {
+          if (oldObj.lookCount[v]) {
+            this.countObj.lookCount[v] = this.countObj.lookCount[v] ? Math.max(this.countObj.lookCount[v], oldObj.lookCount[v]) : oldObj.lookCount[v]
+          } else {
+            this.countObj.lookCount[v] = this.countObj.lookCount[v]
+          }
+        })
+        this.countObj.loginMember = [...new Set([...oldObj.loginMember, this.login])]
+        await this.getGithubAxios(VUE_APP_AUTH).patch('/repos/FangHaoming/web-blog/issues/comments/1190996607', { body: JSON.stringify(this.countObj) })
+        localStorage.setItem('countObj', JSON.stringify(this.countObj))
+        this.setCount()
       },
-      init() {
+      async init() {
         this.setIssueTitle()
-        this.getLogin()
+        await this.getLogin()
+        await this.getCount()
+        this.setCount()
       },
     },
 
-    mounted() {
-      this.init()
+    async mounted() {
+      await this.init()
+      this.setIsShowCustomer()
       this.$router.beforeEach(async (to, from, next) => {
-        this.getLogin()
+        await this.getLogin()
         this.setIsShowPage(to)
         this.setIsShowCustomer(to)
         next()
@@ -233,16 +255,17 @@
         this.isSidebarOpen = false
         this.setIssueTitle()
       })
-      window.addEventListener('beforeunload', (e) => {
-        e.preventDefault()
-        this.updateCountBeforeClose()
-      })
     },
 
     watch: {
       issueTitle() {
-        this.getCount()
         this.updateCount()
+        this.updateRemoteCount()
+      },
+      login(val) {
+        if(val && val !==  AUTHOR) {
+          this.isShowCustomer = true
+        }
       }
     }
   }
