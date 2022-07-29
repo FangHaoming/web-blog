@@ -1,1 +1,1 @@
-export const VUE_APP_AUTH = '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'
+export const VUE_APP_AUTH = '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'
