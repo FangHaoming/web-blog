@@ -6,6 +6,6 @@
 
 难在自觉，贵在坚持。
 
-“以大多数人的努力程度之低，根本轮到不拼天赋”
+### “以大多数人的努力程度之低，根本轮到不拼天赋”
 
 Controlling complexity is the essence of computer programming.
