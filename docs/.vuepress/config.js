@@ -26,8 +26,8 @@ const sidebar = {}
 // getIndex()
 
 module.exports = {
-    title: 'awesome-web',
-    description: '个人学习用途博客',
+    title: '方浩铭的个人网站',
+    description: "FangHaoming's Personal Website",
     base: '/',
     themeConfig: {
         repo: 'Fanghaoming/web-blog',
