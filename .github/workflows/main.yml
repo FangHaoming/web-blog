@@ -19,8 +19,7 @@ jobs:
       # 拉取代码
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
+
       # 设置node
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
