@@ -39,7 +39,7 @@ jobs:
           export OWNER=$env_OWNER
           export REPO=$env_REPO
           export CLIENT_ID=$env_CLIENT_ID
-          export CLIENT_SECRET=$env_.CLIENT_SECRET
+          export CLIENT_SECRET=$env_CLIENT_SECRET
           npm install && npm run build
 
       # 2、部署到 GitHub Pages
