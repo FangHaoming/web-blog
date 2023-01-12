@@ -28,6 +28,10 @@ jobs:
           cache: 'npm'
       # 1、生成静态文件
       - name: Build
+        run: export OWNER=${{ secrets.OWNER }}
+        run: export REPO=${{ secrets.REPO }}
+        run: export CLIENT_ID=${{ secrets.CLIENT_ID }}
+        run: export CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
         run: npm install && npm run build
 
       # 2、部署到 GitHub Pages
