@@ -29,11 +29,11 @@ jobs:
       # 1、生成静态文件
       - name: Build
         run: |
-          echo ${{ secrets.REPO }}
-          export OWNER=${{ secrets.OWNER }}
-          export REPO=${{ secrets.REPO }}
-          export CLIENT_ID=${{ secrets.CLIENT_ID }}
-          export CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}
+          echo ${{ vars.REPO }}
+          export OWNER=${{ vars.OWNER }}
+          export REPO=${{ vars.REPO }}
+          export CLIENT_ID=${{ vars.CLIENT_ID }}
+          export CLIENT_SECRET=${{ vars.CLIENT_SECRET }}
           npm install && npm run build
 
       # 2、部署到 GitHub Pages
