@@ -23,9 +23,9 @@ jobs:
       # 设置node
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-          with:
-            node-version: ${{ matrix.node-version }}
-            cache: 'npm'
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       # 1、生成静态文件
       - name: Build
         run: npm install && npm run build
