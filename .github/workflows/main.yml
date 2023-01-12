@@ -6,6 +6,12 @@ on:
     branches:
       - master
 
+env:
+  env_REPO: ${{ vars.REPO }}
+  env_OWNER: ${{ vars.OWNER }}
+  env_CLIENT_ID: ${{ vars.CLIENT_ID }}
+  env_CLIENT_SECRET: ${{ vars.CLIENT_SECRET }}
+
 # 任务
 jobs:
   build-and-deploy:
@@ -29,11 +35,11 @@ jobs:
       # 1、生成静态文件
       - name: Build
         run: |
-          echo ${{ vars.REPO }}
-          export OWNER=${{ vars.OWNER }}
-          export REPO=${{ vars.REPO }}
-          export CLIENT_ID=${{ vars.CLIENT_ID }}
-          export CLIENT_SECRET=${{ vars.CLIENT_SECRET }}
+          echo "$env_REPO"
+          export OWNER=$env_OWNER
+          export REPO=$env_REPO
+          export CLIENT_ID=$env_CLIENT_ID
+          export CLIENT_SECRET=$env_.CLIENT_SECRET
           npm install && npm run build
 
       # 2、部署到 GitHub Pages
