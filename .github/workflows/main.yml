@@ -29,6 +29,7 @@ jobs:
       # 1、生成静态文件
       - name: Build
         run: |
+          echo ${{ secrets.REPO }}
           export OWNER=${{ secrets.OWNER }}
           export REPO=${{ secrets.REPO }}
           export CLIENT_ID=${{ secrets.CLIENT_ID }}
