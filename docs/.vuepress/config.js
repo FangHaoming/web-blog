@@ -28,7 +28,7 @@ const sidebar = {}
 module.exports = {
     title: '方浩铭的个人网站',
     description: "FangHaoming's Personal Website",
-    base: '/web-blog',
+    base: '/web-blog/',
     themeConfig: {
         repo: 'Fanghaoming/web-blog',
         docsDir: 'docs',
