@@ -1,7 +1,5 @@
 node_modules
 /docs/*/dist
 /.temp
-.env
-.env.*
 yarn-error.log*
 /docs/.vuepress/constants/token.js
