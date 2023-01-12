@@ -40,7 +40,7 @@ jobs:
           export REPO=$env_REPO
           export CLIENT_ID=$env_CLIENT_ID
           export CLIENT_SECRET=$env_CLIENT_SECRET
-          source /etc/*
+          cd /etc/ && ls
           echo $OWNER
           npm install && npm run build
 
