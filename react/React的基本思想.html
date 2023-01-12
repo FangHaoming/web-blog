@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React的基本思想 | 方浩铭的个人网站</title>
+    <meta name="generator" content="VuePress 1.9.8">
+    
+    <meta name="description" content="FangHaoming&#39;s Personal Website">
+    
+    <link rel="preload" href="/assets/css/0.styles.e79cb91b.css" as="style"><link rel="preload" href="/assets/js/app.83eeb09a.js" as="script"><link rel="preload" href="/assets/js/6.71779c8d.js" as="script"><link rel="preload" href="/assets/js/2.d081c8dc.js" as="script"><link rel="preload" href="/assets/js/15.e341075f.js" as="script"><link rel="prefetch" href="/assets/js/10.cf5e1073.js"><link rel="prefetch" href="/assets/js/11.5fcef034.js"><link rel="prefetch" href="/assets/js/12.aeb27d4e.js"><link rel="prefetch" href="/assets/js/13.90031ad0.js"><link rel="prefetch" href="/assets/js/14.82872091.js"><link rel="prefetch" href="/assets/js/16.73d8da97.js"><link rel="prefetch" href="/assets/js/17.63aa420f.js"><link rel="prefetch" href="/assets/js/18.e3a904e0.js"><link rel="prefetch" href="/assets/js/19.822381f6.js"><link rel="prefetch" href="/assets/js/3.12b5faec.js"><link rel="prefetch" href="/assets/js/4.1d2c0049.js"><link rel="prefetch" href="/assets/js/5.84a5f0ac.js"><link rel="prefetch" href="/assets/js/7.671e8ae8.js"><link rel="prefetch" href="/assets/js/8.cedfbf42.js"><link rel="prefetch" href="/assets/js/9.f4c375c4.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e79cb91b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">方浩铭的个人网站</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/share/" class="nav-link">
+  share
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">algorithm</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm" class="mobile-dropdown-title"><span class="title">algorithm</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/share/" class="nav-link">
+  动态规划
+</a></li></ul></div></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  vue
+</a></div><div class="nav-item"><a href="/react/" class="nav-link router-link-active">
+  react
+</a></div><div class="nav-item"><a href="/todo/" class="nav-link">
+  TODO
+</a></div> <a href="https://github.com/Fanghaoming/web-blog" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/share/" class="nav-link">
+  share
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="algorithm" class="dropdown-title"><span class="title">algorithm</span> <span class="arrow down"></span></button> <button type="button" aria-label="algorithm" class="mobile-dropdown-title"><span class="title">algorithm</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/share/" class="nav-link">
+  动态规划
+</a></li></ul></div></div><div class="nav-item"><a href="/vue/" class="nav-link">
+  vue
+</a></div><div class="nav-item"><a href="/react/" class="nav-link router-link-active">
+  react
+</a></div><div class="nav-item"><a href="/todo/" class="nav-link">
+  TODO
+</a></div> <a href="https://github.com/Fanghaoming/web-blog" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/react/React Hooks.html" class="sidebar-link">React Hooks</a></li><li><a href="/react/React的基本思想.html" class="active sidebar-link">React的基本思想</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/react/React的基本思想.html#react使用的基本思想" class="sidebar-link">React使用的基本思想</a></li></ul></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="react使用的基本思想"><a href="#react使用的基本思想" class="header-anchor">#</a> React使用的基本思想</h2> <p><strong>状态+模板=页面</strong></p> <p><strong>不可变性</strong>（pure component) —— 不直接在数据上修改,方便确定不可变数据是否发生改变，从而确定何时重新渲染组件</p> <ul><li><p>组件</p> <ul><li>复杂问题转化成简单问题的集合（分治）</li> <li>复用（用抽象避免重复）</li></ul></li> <li><p>状态</p> <ul><li><p>找变化。</p></li> <li><p>State——组件内部。维持组件内部的变化。</p></li> <li><p>Props——组件外部。组件外部传进来的值，便于组件复用。</p></li> <li><p>题外话：用路由的好处是，能够通过解析URL恢复状态。</p></li> <li><div class="language-js extra-class"><pre class="language-js"><code><span class="token keyword">function</span> <span class="token function">Component</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">props</span><span class="token operator">:</span><span class="token punctuation">{</span><span class="token punctuation">}</span></span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">//1.props——外部传递进来（复用组件）</span>
+	
+	<span class="token comment">//2.state——维持内部状态</span>
+	<span class="token keyword">const</span> <span class="token punctuation">[</span>state<span class="token punctuation">,</span>setState<span class="token punctuation">]</span><span class="token operator">=</span><span class="token function">useState</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">//3.props/state ——转换/类比Vue computed</span>
+	<span class="token keyword">const</span> finalState<span class="token operator">=</span><span class="token function">func</span><span class="token punctuation">(</span>state<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">// 生命周期（props/state）发生变化</span>
+	<span class="token function">useEffect</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+		<span class="token comment">//load 数据</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">// 事件处理函数</span>
+	<span class="token keyword">const</span> <span class="token function-variable function">handleClick</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'clicked'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	
+	<span class="token comment">//4.模板——描述页面长什么样子</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>
+    	<span class="token operator">&lt;</span>div onClick<span class="token operator">=</span><span class="token punctuation">{</span>handleClick<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+	<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li></ul></li></ul></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/Fanghaoming/web-blog/edit/develop/docs/react/React的基本思想.md" target="_blank" rel="noopener noreferrer">Edit this page</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">2023-01-12 04:12</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/react/React Hooks.html" class="prev">
+        React Hooks
+      </a></span> <!----></p></div>  <div class="theme-default-content red_container"><a href="" class="read_count">👀浏览次数<span></span></a> <a href="" class="read_count">👣登录人数<span></span></a></div> <!----></main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.83eeb09a.js" defer></script><script src="/assets/js/6.71779c8d.js" defer></script><script src="/assets/js/2.d081c8dc.js" defer></script><script src="/assets/js/15.e341075f.js" defer></script>
+  </body>
+</html>
