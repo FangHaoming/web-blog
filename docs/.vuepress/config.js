@@ -3,7 +3,6 @@ const fs = require('fs')
 const docsPath = path.join(__dirname, '..')
 const moment = require('moment');
 require('dotenv').config()
-console.dir(process.env)
 
 const nav = []
 const sidebar = {}
