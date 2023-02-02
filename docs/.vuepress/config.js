@@ -39,12 +39,22 @@ module.exports = {
         nav: [
             { text: 'share', link: '/share/' },
             {
+                text: 'hybrid', items: [
+                    { text: '小程序', link: '/hybrid/小程序.md' }
+                ]
+            },
+            {
                 text: 'algorithm', items: [
                     { text: '动态规划', link: '/share/' }
                 ]
             },
             { text: 'vue', link: '/vue/' },
             { text: 'react', link: '/react/' },
+            {
+                text: 'promotion', items: [
+                    { text: '系统设计', link: '/promotion/system-design.md' }
+                ]
+            },
             { text: 'TODO', link: '/todo/' },
         ],
         // sidebar: [
