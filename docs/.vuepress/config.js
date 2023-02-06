@@ -29,6 +29,7 @@ module.exports = {
     title: '方浩铭的个人网站',
     description: "FangHaoming's Personal Website",
     base: '/web-blog/',
+    port: '5000',
     themeConfig: {
         repo: 'Fanghaoming/web-blog',
         docsDir: 'docs',
