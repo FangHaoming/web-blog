@@ -33,7 +33,7 @@ module.exports = {
     themeConfig: {
         repo: 'Fanghaoming/web-blog',
         docsDir: 'docs',
-        docsBranch: 'develop',
+        docsBranch: 'master',
         editLinks: true,
         sidebarDepth: 2,
         lastUpdated: 'Last Updated',
