@@ -7,3 +7,6 @@
 ### “以大多数人的努力程度之低，根本轮不到拼天赋”
 
 Controlling complexity is the essence of computer programming.
+
+等电梯还是爬楼梯？如果现状足够安稳，就等电梯，否则锻炼身体爬楼梯吧
+
