@@ -46,7 +46,9 @@ module.exports = {
             },
             {
                 text: 'algorithm', items: [
-                    { text: '动态规划', link: '/share/' }
+                    { text: '数据结构', link: '/algorithm/data-structure/' },
+                    { text: '算法', link: '/algorithm/algorithm/' },
+                    { text: '思维', link: '/algorithm/logic/' },
                 ]
             },
             { text: 'vue', link: '/vue/' },
@@ -56,34 +58,61 @@ module.exports = {
                     { text: '系统设计', link: '/promotion/system-design.md' }
                 ]
             },
-            { text: 'TODO', link: '/todo/' },
         ],
-        // sidebar: [
-        //     {
-        //         title: 'Group 1',   // 必要的
-        //         path: '/vue/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-        //         collapsable: true, // 可选的, 默认值是 true,
-        //         sidebarDepth: 2,    // 可选的, 默认值是 1
-        //         children: [
-        //             '/share/CI_CD',
-        //             '/share/客户端缓存',
-        //         ]
-        //     }
-        // ]
-        sidebar: {
-            '/share/': [
-                'CI_CD',
-                '客户端缓存',
-                'JS异步机制',
-            ],
-            '/vue/': [
-                '响应式原理',
-            ],
-            '/react/': [
-                'React Hooks',
-                'React的基本思想',
-            ],
-        },
+        sidebar: [
+            {
+                title: '算法',   // 必要的
+                path: '/algorithm/',      // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                sidebarDepth: 2,    // 可选的, 默认值是 1
+                children: [
+                    {
+                        title: '算法思维',
+                        path: '/algorithm/logic/',
+                        children: [
+                            {
+                                title: '动态规划',
+                                path: '/algorithm/logic/动态规划',
+                            },
+                            {
+                                title: '双指针',
+                                path: '/algorithm/logic/双指针',
+                            },
+                            {
+                                title: '回溯法',
+                                path: '/algorithm/logic/回溯法',
+                            },
+                            {
+                                title: '数学',
+                                path: '/algorithm/logic/数学',
+                            },
+                            {
+                                title: '滑动窗口',
+                                path: '/algorithm/logic/滑动窗口',
+                            },
+                        ]
+                    }
+                ]
+            }
+        ]
+        // sidebar: {
+        //     '/share/': [
+        //         'CI_CD',
+        //         '客户端缓存',
+        //         'JS异步机制',
+        //     ],
+        //     '/vue/': [
+        //         '响应式原理',
+        //     ],
+        //     '/react/': [
+        //         'React Hooks',
+        //         'React的基本思想',
+        //     ],
+        //     '/algorithm/': [
+        //         '动态规划',
+        //         '双指针',
+        //         '回溯法',
+        //     ]
+        // },
     },
     plugins: {
         '@vssue/vuepress-plugin-vssue': {
